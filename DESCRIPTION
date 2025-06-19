@@ -1,4 +1,4 @@
-Package: PopGrid2
+Package: PopGrid_v2
 Imports: tidyverse, tidycensus, tigris, sf, parallel, filelock, shiny, shinyFiles, parallelly
 Depends: 
     tidyverse,
@@ -13,9 +13,21 @@ Depends:
     R (>= 2.10)
 Title: Allocate U.S. Census data to grids
 Version: 1.0.0
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors@R: c(person("Will", "Maddock",
+              role = c("aut")),
+            person("Melanie", "Jackson",
+                      email="majackson@indecon.com", role = c("aut", "cre"), 
+                      comment = c(ORCID = "0000-0002-1856-3149")),
+            person("Joseph", "Chang", 
+                      email="jchang@indecon.com", 
+                      role = c("dtc"),),
+            person("Elizabeth", "Etchells", 
+                      email="etchells.elizabeth@epa.gov", 
+                      role = c("fnd", "rev")),
+            person("Maniloff", "Peter", 
+                      email="maniloff.peter@epa.gov", 
+                      role = c("fnd", "rev"))
+            )
 Description: A suite of functions to allocate block-level U.S. Census data on race, ethnicity, age, and sex to grid definitions of interest.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license

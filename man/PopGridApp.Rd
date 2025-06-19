@@ -10,7 +10,7 @@ PopGridApp()
 \link{PopGridApp} does not return a value but instead saves three output files: a shapefile of the selected grid with population data, a CSV with gridded population for each of the race-ethnicity-gender-age demographic groups included in BenMAP, and a CSV with county weights for each of the eight race-ethnic groups for each grid cell.
 }
 \description{
-This function runs PopGrid2 via a shiny app UI, offering the same functionality as \link{run_aggregation} but with a simple way to provide inputs.
+This function runs PopGrid_v2 via a shiny app UI, offering the same functionality as \link{run_aggregation} but with a simple way to provide inputs.
 }
 \examples{
 PopGridApp()

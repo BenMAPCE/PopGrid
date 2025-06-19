@@ -1,9 +1,9 @@
 #' Shiny app to aggregate block-level population data from the decennial Census to a chosen grid definition
 #'
 #' @description
-#' This function runs PopGrid2 via a shiny app UI, offering the same functionality as [PopGrid2::run_aggregation] but with a simple way to provide inputs.
+#' This function runs PopGrid_v2 via a shiny app UI, offering the same functionality as [PopGrid_v2::run_aggregation] but with a simple way to provide inputs.
 #'
-#' @return [PopGrid2::PopGridApp] does not return a value but instead saves three output files: a shapefile of the selected grid with population data, a CSV with gridded population for each of the race-ethnicity-gender-age demographic groups included in BenMAP, and a CSV with county weights for each of the eight race-ethnic groups for each grid cell.
+#' @return [PopGrid_v2::PopGridApp] does not return a value but instead saves three output files: a shapefile of the selected grid with population data, a CSV with gridded population for each of the race-ethnicity-gender-age demographic groups included in BenMAP, and a CSV with county weights for each of the eight race-ethnic groups for each grid cell.
 #' @export
 #'
 #' @examples
@@ -12,7 +12,7 @@
 
 PopGridApp <- function(){
   ui <- fluidPage(
-    titlePanel("PopGrid2"),
+    titlePanel("PopGrid_v2"),
     sidebarLayout(
 
       # Sidebar input pane UI
@@ -48,7 +48,7 @@ PopGridApp <- function(){
                       "Overwrite existing output files of the same name in the output folder?",
                       value = FALSE,
                       width = "100%"),
-        actionButton("run", "Run PopGrid2")
+        actionButton("run", "Run PopGrid_v2")
       ),
 
       # Main panel tabset is rendered conditionally by code in the server below based on inputs
