@@ -1,0 +1,104 @@
+---
+title: "PopGrid2 Vignette"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+date: "2025-06-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  eval    = F,
+  echo    = T,     ### Echo the commands of the code chunks in the compiled document
+  message = FALSE, ### Don't include command-line messages output from evaluating code chunks
+  cache   = FALSE, ### Don't cache the evaluation of code chunks
+  warning = FALSE, ### Don't include warnings from evaluating code chunks
+  table.format = "html"
+)
+```
+
+## Setup
+
+Start off by installing the PopGrid2 package from GitHub.
+
+```{r install packages}
+require(devtools)
+install_github("BenMAPCE/PopGrid", dependencies = TRUE)
+```
+
+Now load the package.
+
+```{r load package}
+library(PopGrid2)
+```
+
+Store file path inputs (e.g. grid shapefiles) and outputs. This assumes the file structure in your working directory includes a folder called data with any input shapefiles you want to use and a folder called outputs for storing the outputs from these functions.
+
+```{r file paths}
+data_path <- file.path(getwd(), "data")
+out_path <- file.path(getwd(), "outputs")
+```
+
+Request a Census API key from http://api.census.gov/data/key_signup.html, then replace my_key_here below with your key and run this chunk. Alternatively, you can uncomment the following line to use Will's key for demo purposes. You only need to set this key one time.
+
+```{r Census API key}
+census_api_key <- "my_key_here"
+#census_api_key <- "f6ac31746f7f878947cc9e626f5901770b7289c5"
+census_api_key(census_api_key, install = TRUE, overwrite = TRUE)
+```
+
+Restart R (Ctrl+Shift+F10).
+
+## Demo PopGrid
+
+Now that we've installed and loaded PopGrid and set a Census API key, let's take a look at the documentation for the main function, run_aggregation. You can do this by running the command in the following chunk or by searching for the function by name in the Help pane in RStudio.
+
+```{r view function documentation}
+?run_aggregation
+```
+
+run_aggregation includes functionality to return spatial population data at the county and tract level without requiring the user to supply a county or tract shapefile of their own. First, for counties:
+
+```{r county aggregation}
+run_aggregation(mode = "county",
+                output_path = out_path,
+                output_name = "county_test")
+```
+
+If the user would like to look only at a particular state (e.g. "MA") or list of states (e.g. c("MA", "RI", "CT")), they can pass that information using postal abbreviations to the "states" parameter. By default, the function will allocate population from all CONUS states.
+
+To run for a list of states at the tract level:
+
+```{r tract aggregation}
+run_aggregation(mode = "tract",
+                states = c("VA", "NC"),
+                output_path = out_path,
+                output_name = "tract_test")
+```
+
+If the user would instead like to allocate population to a shapefile with a grid, they can specify the mode as "shapefile" instead. In this case, the user is required to also pass a path and file name (without extension) for the shapefile. In shapefile mode, the user can also specify one of two allocation methods, centroid and area weighting, using the "area_weight" parameter. This indicates whether each block's population should be allocated to overlapping grid cells based on the location of the block's centroid or the proportional area of the block in each overlapping grid cell. The "area_weight" parameter is set to TRUE by default, but the user can specify FALSE instead to use the centroid method.
+
+To use run_aggregation to allocate population to a user-provided grid using the centroid method:
+
+```{r centroid grid aggregation}
+run_aggregation(mode = "shapefile",
+                grid_path = data_path,
+                grid_name = "CMAQ_12km_Nation",
+                states = c("NV", "UT"),
+                area_weight = FALSE,
+                output_path = out_path,
+                output_name = "grid_test_centroid")
+```
+
+To use run_aggregation to allocate a single state's population to a user-provided grid using the area weighting method:
+
+```{r area weighted grid aggregation}
+run_aggregation(mode = "shapefile",
+                grid_path = data_path,
+                grid_name = "CMAQ_12km_Nation",
+                states = "SD",
+                area_weight = TRUE,
+                output_path = out_path,
+                output_name = "grid_test_areaweight")
+```
