@@ -14,7 +14,7 @@ Depends:
 Title: Allocate U.S. Census data to grids
 Version: 1.0.0
 Authors@R: c(person("Will", "Maddock",
-              email=will.w.maddock@gmail.com,
+              email="will.w.maddock@gmail.com",
               role = c("aut"),
               comment = c(ORCID="0009-0009-4854-5759")),
             person("Melanie", "Jackson",
