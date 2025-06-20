@@ -4,7 +4,7 @@ MARS_adjustments <- function(
 ){
 
   age_values<-unique(substr(colnames(data)[!grepl(c("GEOID","NAME","geometry") %>% paste(collapse = "|"),colnames(data))],6,9))
-  state.allocation.factors<-PopGrid_v2:::State.MARS
+  state.allocation.factors<-PopGrid2:::State.MARS
     state.allocation.factors$STATE_FIPS<-sprintf("%02d",state.allocation.factors$STATE_FIPS)
     #add state names and join state allocation factors with data
     data$STATE_FIPS<-substr(data$GEOID,1,2)

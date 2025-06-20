@@ -14,7 +14,7 @@
 #' @param output_name A character value representing the name to use for output files.
 #' @param overwrite A `TRUE/FALSE` value indicating whether to overwrite existing output files. Defaults to `FALSE`.
 #'
-#' @return [PopGrid_v2::run_aggregation()] does not return a value, but instead saves three output files: a shapefile of the selected grid with population data, a CSV with the number of people in each grid cell for each of the race-ethnicity-gender-age demographic groups included in BenMAP, and a CSV with the fraction of the total population in each of the eight race-ethnic groups that comes from each U.S. county.
+#' @return [PopGrid2::run_aggregation()] does not return a value, but instead saves three output files: a shapefile of the selected grid with population data, a CSV with the number of people in each grid cell for each of the race-ethnicity-gender-age demographic groups included in BenMAP, and a CSV with the fraction of the total population in each of the eight race-ethnic groups that comes from each U.S. county.
 #' @export
 #'
 #' @examples
@@ -103,7 +103,7 @@ run_aggregation <- function(
   # if user has selected either county or tract mode, run helper functions specific to those grid definitions
   if (mode == "county"){
     message("Aggregating population data to U.S. Census County level")
-    cat(paste0("PopGrid_v2 run started at ", t1),
+    cat(paste0("PopGrid2 run started at ", t1),
         "Inputs used:",
         paste0("mode = ", mode),
         paste0("year = ", as.character(year)),
@@ -117,7 +117,7 @@ run_aggregation <- function(
     return()
   } else if (mode == "tract"){
     message("Aggregating population data to U.S. Census Tract level")
-    cat(paste0("PopGrid_v2 run started at ", t1),
+    cat(paste0("PopGrid2 run started at ", t1),
         "Inputs used:",
         paste0("mode = ", mode),
         paste0("year = ", as.character(year)),
@@ -174,7 +174,7 @@ run_aggregation <- function(
     # set up cluster to do parallel processing
     my_cluster <- makeCluster(availableCores()/2, type = "PSOCK")
     clusterEvalQ(my_cluster, {
-      library(PopGrid_v2)
+      library(PopGrid2)
     })
     message(paste0("state = ", state))
 
@@ -291,7 +291,7 @@ run_aggregation <- function(
                 write.table(interior_csv, file = csv_outfile, row.names = FALSE, sep = ",")
                 write.table(weights_interior, file = weights_outfile, row.names = FALSE, sep = ",")
                 write.table(weights_edge, file = edge_weights_outfile, row.names = FALSE, sep = ",")
-                cat(paste0("PopGrid_v2 run started at ", t1),
+                cat(paste0("PopGrid2 run started at ", t1),
                     "Inputs used:",
                     paste0("mode = ", mode),
                     paste0("grid_path = ", grid_path),
@@ -310,7 +310,7 @@ run_aggregation <- function(
               write.table(interior_csv, file = csv_outfile, row.names = FALSE, sep = ",")
               write.table(weights_interior, file = weights_outfile, row.names = FALSE, sep = ",")
               write.table(weights_edge, file = edge_weights_outfile, row.names = FALSE, sep = ",")
-              cat(paste0("PopGrid_v2 run started at ", t1),
+              cat(paste0("PopGrid2 run started at ", t1),
                   "Inputs used:",
                   paste0("mode = ", mode),
                   paste0("grid_path = ", grid_path),

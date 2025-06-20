@@ -1,4 +1,4 @@
-Package: PopGrid_v2
+Package: PopGrid2
 Imports: tidyverse, tidycensus, tigris, sf, parallel, filelock, shiny, shinyFiles, parallelly
 Depends: 
     tidyverse,
