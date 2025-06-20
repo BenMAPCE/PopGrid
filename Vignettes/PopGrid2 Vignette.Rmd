@@ -24,7 +24,7 @@ Start off by installing the PopGrid2 package from GitHub.
 
 ```{r install packages}
 require(devtools)
-install_github("BenMAPCE/PopGrid", dependencies = TRUE)
+install_github("BenMAPCE/PopGrid2", dependencies = TRUE)
 ```
 
 Now load the package.
